@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    ports:
+            - 5432:5432
+    environment:
+            - POSTGRES_PASSWORD=postgres
+    volumes:
+            - ./db-data:/var/lib/postgresql/data
+    container_name: sitower_postgres
+
+  web:
+    restart: always
+    build: .
+    command: bash -c "python manage.py runserver 0.0.0.0:8000 && python manage.py migrate"
+    volumes:
+            - .:/code
+    ports:
+            - 8000:8000
+    depends_on:
+            - db
+    container_name: sitower_web
+
+  nginx:
+    build: ./nginx
+    ports:
+            - 80:80
+    depends_on:
+            - web
+    container_name: sitower_nginx
+
+volumes:
+    db-data:
