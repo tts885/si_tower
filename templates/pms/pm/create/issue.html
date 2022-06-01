@@ -1,0 +1,353 @@
+{% load widget_tweaks %}
+{% block content %}
+<section class="content">
+<!--    <div class="container-fluid">-->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-edit"></i>
+                     {% if request.session.isUpdate %}
+                    【更新】：課題<code>(＃{{object.pk}}_{{object.name}})</code>
+                     {% else %}
+                    【新規作成】：課題<code>(＃{{object.pk}}_{{object.name}})</code>
+                     {% endif %}
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill"
+                            href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home"
+                            aria-selected="true">基本</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill"
+                            href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile"
+                            aria-selected="false">作業</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-content-above-messages-tab" data-toggle="pill"
+                            href="#custom-content-above-messages" role="tab"
+                            aria-controls="custom-content-above-messages" aria-selected="false">Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-content-above-settings-tab" data-toggle="pill"
+                            href="#custom-content-above-settings" role="tab"
+                            aria-controls="custom-content-above-settings" aria-selected="false">Settings</a>
+                    </li>
+                </ul>
+                <div class="tab-custom-content">
+                    <p class="lead mb-0">ここにカスタムコンテンツを格納</p>
+                </div>
+                <div class="tab-content" id="custom-content-above-tabContent">
+                    <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel"
+                        aria-labelledby="custom-content-above-home-tab">
+                        {% if request.session.isUpdate %}
+                        <form action="" method="POST">
+                            {% else %}
+                            <form action="{% url 'pms:issue_Create'　%}" method="POST">
+                                {% endif %}
+
+                                {% csrf_token %}
+                                {{ form.issue.as_hidden }}
+
+                                <!--card-body Start-->
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>題名:</label>
+                                                {% render_field form.name class="form-control" placeholder="題名を入力してください。"autocomplete="off" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>ステータス:</label>
+                                                {% render_field form.status class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>対象バージョン:</label>
+                                                {% render_field form.version class="form-control" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>チーム:</label>
+                                                {% render_field form.team class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>SUBチーム:</label>
+                                                {% render_field form.subTeam class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>起票者:</label>
+                                                {% render_field form.creater class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>起票日:</label>
+                                                {% render_field form.createDate id="createDate" class="form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-6">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label>対象バージョン:</label>-->
+<!--                                                {% render_field form.version class="form-control" autocomplete="off" placeholder=""%}-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-6">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label>親チケット:</label>-->
+<!--                                                {% render_field form.parentTracker class="form-control" autocomplete="off" placeholder=""%}-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>予定開始日:</label>
+                                                {% render_field form.planStartDate id="planStartDate" class="form-control" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>予定終了日:</label>
+                                                {% render_field form.planEndDate id="planEndDate" class="form-control" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-6">
+                                            <div class="form-group">
+                                                <label>実績開始日:</label>
+                                                {% render_field form.actualStartDate id="actualStartDate" class="form-control" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>実績終了日:</label>
+                                                {% render_field form.actualEndDate id="actualEndDate" class="form-control" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>予定工数(h):</label>
+                                                {% render_field form.estimate class="form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>残作業時間(h):</label>
+                                                {% render_field form.remainingWorkTime class="form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>担当者:</label>
+                                                {% render_field form.owner class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>レビュー担当者:</label>
+                                                {% render_field form.reviewOwner class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>内容:</label>
+                                                {% render_field form.contents id="text-area1" class="form-control" rows="2" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>優先度:</label>
+                                                {% render_field form.Priority class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="form-group clearfix">
+<!--                                                <label>クライアント共有:</label>-->
+                                                <div class="icheck-danger">
+                                                    {% render_field form.shareToClient id="shareToClient" %}
+                                                    <label for="shareToClient">クライアント共有
+                                                    </label>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group clearfix">
+<!--                                                <label>クライアント共有:</label>-->
+                                                <div class="icheck-danger">
+                                                    {% render_field form.clientConsideration id="clientConsideration" %}
+                                                    <label for="clientConsideration">クライアント検討
+                                                    </label>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group clearfix">
+<!--                                                <label>クライアント共有:</label>-->
+                                                <div class="icheck-primary">
+                                                    {% render_field form.shareToPM id="shareToPM" %}
+                                                    <label for="shareToPM">PMへ共有
+                                                    </label>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>担当クライアント:</label>
+                                                {% render_field form.ownerClient class="form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>対応期限:</label>
+                                                {% render_field form.dueDate id="dueDate" class="form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>完了基準:</label>
+                                                {% render_field form.completionCriteria class="form-control" rows="3" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>対応方針／状況:</label>
+                                                {% render_field form.solution id="text-area4" class="form-control" rows="3" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>分類:</label>
+                                                {% render_field form.riskIssueCategory class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>発生工程:</label>
+                                                {% render_field form.occurredPhase class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>解決予定工程:</label>
+                                                {% render_field form.solvePhase_Plan class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>影響範囲:</label>
+                                                {% render_field form.impactScope class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>影響工程:</label>
+                                                {% render_field form.impactPhase class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>遅延理由区分:</label>
+                                                {% render_field form.delayReason class="select2 form-control" autocomplete="off" style="width: 100%;"%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>進捗（遅延）詳細:</label>
+                                                {% render_field form.delayDescription class="form-control" rows="3" autocomplete="off" placeholder=""%}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--card-body End-->
+                                <div class="card-footer">
+                                {% if request.session.isUpdate %}
+                                    <button type="button" class="btn btn-primary" onClick="javascript:history.go(-1);">一覧画面へ</button>
+                                    <button type="submit" class="btn btn-primary float-right">更　新</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary">前画面へ</button>
+                                    <button type="submit" class="btn btn-primary float-right">追　加</button>
+                                {% endif %}
+                                </div>
+                            </form>
+                        </form>
+
+                    </div>
+                    <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel"
+                        aria-labelledby="custom-content-above-profile-tab">
+                        {% include 'pms/pm/result_list/issue/issue_worklist.html' %}
+                    </div>
+                    <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel"
+                        aria-labelledby="custom-content-above-messages-tab">
+                        タブ３コンテンツ
+                    </div>
+                    <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel"
+                        aria-labelledby="custom-content-above-settings-tab">
+                        タブ４コンテンツ
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--    </div>-->
+</section>
+
+{% endblock content %}

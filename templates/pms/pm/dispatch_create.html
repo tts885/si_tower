@@ -1,0 +1,91 @@
+{% extends "pms/common/_base.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Dashboard 1 {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- DataTables -->
+
+{% endblock stylesheets %}
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>検索</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">General Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+<!--      <div class="container-fluid">-->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Model</h3>
+              </div>
+              <!-- form start -->
+              <form action="{% url 'pms:select_model'　%}" method="POST" >
+                {% csrf_token %}
+                {{ formset.management_form }}
+                <div class="card-body">
+                  <div class="col-lg-6">
+                    {% for form in formset %}
+                    <div class="form-group">
+                      <label>Model選択</label>
+                      {% render_field form.selectForm class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;"　%}
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="card-footer">
+<!--              <button type="submit" class="btn btn-primary  float-right">検索条件指定へ</button>-->
+                  <button type="submit" class="btn btn-primary float-right">新規データ作成へ</button>
+                  <button type="submit" class="btn btn-success ">データ一括インポートへ</button>
+                  <a href="#/download"> ExcelTemplateDownload　<i class="fa fa-download"></i></a>
+                </div>
+              </form>
+            </div>
+<!--          </div>-->
+    </section>
+    {% if model_name == const.MODEL_DELIVERABLES %}
+        {% include const.PM_CREATE_DELIVERABLES_URL %}
+
+    {% elif model_name == const.MODEL_WORK %}
+        {% include 'pms/pm/create/work.html' %}
+
+    {% elif model_name == const.MODEL_SCENARIO %}
+        {% include const.PM_CREATE_SCENARIO_URL  %}
+
+    {% elif model_name == const.MODEL_BAC %}
+        {% include const.PM_CREATE_BAC_URL  %}
+
+    {% elif model_name == const.MODEL_ISSUE %}
+        {% include 'pms/pm/create/issue.html' %}
+
+    {% elif model_name == const.MODEL_RISK %}
+        {% include const.PM_CREATE_RISK_URL %}
+
+    {% elif model_name == const.MODEL_PARENT %}
+        {% include const.PM_CREATE_PARENT_URL %}
+
+    {% else %}
+
+    {% endif %}
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+{% endblock content %}

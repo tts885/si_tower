@@ -1,0 +1,42 @@
+{% load widget_tweaks %}
+{% block content %}
+<div class="container-fluid">
+    <form action="{% url 'pms:issue_search'　%}" method="POST">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                <div class="form-group">
+                <label>題名:</label>
+                <input class="form-control form-control-sm" type="text" placeholder="検索の題名を入力して検索ください。">
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>ステータス:</label>
+                        {% render_field search_form.status class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;" %}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>担当者:</label>
+                        {% render_field search_form.owner class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-success ">ガントチャートへ</button>
+          <button type="submit" class="btn btn-primary  float-right">検　索</button>
+        </div>
+    </form>
+</div>
+<div class="card">
+   <div class="card-header">
+       <h3 class="card-title">検索結果</h3>
+   </div>
+    {% include 'pms/pm/result_list/issue/issue_list.html' %}
+</div>
+{% endblock content %}

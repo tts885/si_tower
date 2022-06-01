@@ -1,0 +1,101 @@
+{% extends "pms/common/_base.html" %}
+{% load widget_tweaks %}
+
+{% block title %} Dashboard 1 {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- DataTables -->
+
+{% endblock stylesheets %}
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>検索</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">General Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+<!--      <div class="container-fluid">-->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Model</h3>
+              </div>
+              <!-- form start -->
+              <form action="{% url 'pms:search'　%}" method="POST" >
+                {% csrf_token %}
+                <div class="card-body">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Model選択</label>
+                          {% render_field select_model_form.selectForm class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;"　%}
+                        </div>
+                      </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary  float-right">検索条件指定へ</button>
+                </div>
+              </form>
+            </div>
+<!--          </div>-->
+    </section>
+
+    <section class="content">
+<!--      <div class="container-fluid">-->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">検索条件</h3>
+              </div>
+
+                {% if model_name == const.MODEL_DELIVERABLES %}
+                    {% include const.PM_SEARCH_DELIVERABLES_URL %}
+
+                {% elif model_name == const.MODEL_WORK %}
+                    {% include 'pms/pm/search/work.html' %}
+
+                {% elif model_name == const.MODEL_SCENARIO %}
+                    {% include const.PM_SEARCH_SCENARIO_URL  %}
+
+                {% elif model_name == const.MODEL_BAC %}
+                    {% include const.PM_SEARCH_BAC_URL  %}
+
+                {% elif model_name == const.MODEL_ISSUE %}
+                     {% include 'pms/pm/search/issue.html' %}
+
+                {% elif model_name == const.MODEL_RISK %}
+                    {% include const.PM_SEARCH_RISK_URL %}
+
+                {% elif model_name == const.MODEL_PARENT %}
+                    {% include const.PM_SEARCH_PARENT_URL %}
+
+                {% else %}
+
+                {% endif %}
+            </div>
+<!--      </div>-->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+
+{% endblock javascripts %}

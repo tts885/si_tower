@@ -1,0 +1,294 @@
+{% load widget_tweaks %}
+{% block content %}
+<div class="x_panel">
+    <div class="x_title">
+        <h2><i class=""></i> {{ model_name }}を新規  <small>[課題、リスク管理]</small></h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+          <form action="{#% url 'pms:issue_Create'　%#}" method="POST" class="form-horizontal form-label-left">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">題名</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {% render_field form.name class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">ステータス</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.status class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">担当者</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.owner class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">対象バージョン</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.version class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">予定開始日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.planStartDate class="form-control has-feedback-left" id="single_cal4" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status6"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">予定終了日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.planEndDate  class="form-control has-feedback-left" id="single_cal5" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status6"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">実績開始日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.actualStartDate  class="form-control has-feedback-left" id="single_cal6" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status6"　autocomplete="off" %}
+                         <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">実績終了日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.actualEndDate  class="form-control has-feedback-left" id="single_cal7" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status6"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">予定工数(h)</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.estimate class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">残作業時間(h)</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.remainingWorkTime class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">起票者</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.creater class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">起票日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.createDate  class="form-control has-feedback-left" id="single_cal1" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status8"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">内容</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {% render_field form.contents class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">チーム</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.team class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">SUBチーム</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.subTeam class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク種別</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.riskScope class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">クライアント共有</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.shareToClient class="flat" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">対応期限</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.dueDate  class="form-control has-feedback-left" id="single_cal9" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status9"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">次回レビュー日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.planReviewDate  class="form-control has-feedback-left" id="single_cal10" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status9"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク消滅予定日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.riskExtinctionPlanDate  class="form-control has-feedback-left" id="single_cal11" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status9"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">リスク消滅基準</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {% render_field form.completionCriteria class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク対応タイプ</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.riskResponseType class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">リスクによるコスト影響</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {% render_field form.costImpactOfRisk class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク対応に必要なコスト</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.costs class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">コンティンジェンシープラン</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {% render_field form.contingencyPlan class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク顕在化日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.riskExtinctionDate  class="form-control has-feedback-left" id="single_cal13" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status9"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク消滅日</label>
+                        <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                            {% render_field form.riskManifestationDate  class="form-control has-feedback-left" id="single_cal12" placeholder="日付選択" type="search" aria-describedby="inputSuccess6Status9"　autocomplete="off" %}
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">分類</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.riskIssueCategory class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">発生工程</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.occurredPhase class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">解決予定工程</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.solvePhase_Plan class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">発生確率</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.occurrenceProbability class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">影響度</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.impact class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">影響範囲</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.impactScope class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">対応方針／状況</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {% render_field form.solution class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-3 col-xs-12">遅延理由区分</label>
+                        <div class="col-md-2 col-sm-9 col-xs-12">
+                            {% render_field form.delayReason class="form-control"　autocomplete="off" %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label
+                            class="control-label col-md-2 col-sm-3 col-xs-12">遅延理由詳細</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            {% render_field form.delayDescription class="form-control" rows="3" placeholder=""%}
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group">
+                      <div class="col-md-12 col-sm-12 col-xs-12 right">
+                        <button class="btn btn-primary" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="reset">Reset</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                      </div>
+                    </div>
+
+          </form>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,48 @@
+<div class="card-body">
+<table id="serach_workdata" style="width: 100%;" class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>題名</th>
+            <th>担当者</th>
+            <th>ステータス</th>
+            <th>成果物ID</th>
+            <th>レビュー担当者</th>
+            <th>チーム</th>
+            <th>サブチーム</th>
+            <th>親チケット</th>
+            <th>対象バージョン</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in result_list %}
+        <tr>
+            <th class="column-title"><a href="{% url 'pms:issue_Update' record.pk %}">{{ record.pk }}</a></th>
+            <td class="column-title"><a href="{% url 'pms:issue_Update' record.pk %}"> [課題_]{{ record.name|truncatechars:10 }} </a></td>
+            <td class="column-title">{{ record.owner|default_if_none:""  }}</td>
+            <td class="column-title">{{ record.status }}</td>
+            <td class="column-title">{{ record.deliverablesId }}</td>
+            <td class="column-title">{{ record.reviewAssign|default_if_none:"" }}</td>
+            <td class="column-title">{{ record.team|default_if_none:"" }}</td>
+            <td class="column-title">{{ record.subTeam|default_if_none:"" }}</td>
+            <td class="column-title">{{ record.parentTracker  }}</td>
+            <td class="column-title">{{ record.version }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+<!--    <tfoot>-->
+<!--        <tr>-->
+<!--            <th>#</th>-->
+<!--            <th>題名</th>-->
+<!--            <th>担当者</th>-->
+<!--            <th>ステータス</th>-->
+<!--            <th>成果物ID</th>-->
+<!--            <th>レビュー担当者</th>-->
+<!--            <th>チーム</th>-->
+<!--            <th>サブチーム</th>-->
+<!--            <th>親チケット</th>-->
+<!--            <th>対象バージョン</th>-->
+<!--        </tr>-->
+<!--    </tfoot>-->
+</table>
+</div>

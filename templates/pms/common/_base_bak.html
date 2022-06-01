@@ -1,0 +1,107 @@
+<!-- 静的ファイルのURLを生成するstaticタグをロードする -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      {% block meta %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      {% endblock meta %}
+
+      <title>pms! | {% block title %}{% endblock %}</title>
+
+      {% block stylesheets %}
+          <!-- Google Font: Source Sans Pro -->
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+          <!-- Font Awesome Icons -->
+          <link rel="stylesheet" href="/static/pms/plugins/fontawesome-free/css/all.min.css">
+          <!-- Theme style -->
+          <link rel="stylesheet" href="/static/pms/dist/css/adminlte.min.css">
+          <!-- Select2 -->
+          <link rel="stylesheet" href="/static/pms/plugins/select2/css/select2.min.css">
+          <link rel="stylesheet" href="/static/pms/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+      {% endblock stylesheets %}
+
+    {% endblock head %}
+  </head>
+
+<!--  <body class="hold-transition sidebar-mini layout-fixed text-sm dark-mode sidebar-collapse layout-navbar-fixed layout-footer-fixed ">-->
+  <body class="hold-transition layout-fixed text-sm dark-mode layout-navbar-fixed layout-footer-fixed ">
+    {% block body %}
+      <div class="wrapper">
+          <!-- Preloader -->
+          <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="/static/pms/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+          </div>
+          {% block top_navigation %}
+              {% include "pms/common/_top_navigation.html" %}
+          {% endblock top_navigation %}
+
+          {% block sidebar %}
+              {% include "pms/common/_sidebar.html" %}
+          {% endblock sidebar %}
+
+          {% block content %}
+            <!-- {{ content }} -->
+          {% endblock content %}
+
+          {% block footer %}
+              {% include "pms/common/_footer.html" %}
+          {% endblock footer %}
+        </div>
+      </div>
+
+      {% block javascripts %}
+        <!-- REQUIRED SCRIPTS -->
+
+        <!-- jQuery -->
+        <script src="/static/pms/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="/static/pms/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/static/pms/dist/js/adminlte.min.js"></script>
+
+        <!-- Select2 -->
+        <script src="/static/pms/plugins/select2/js/select2.full.min.js"></script>
+
+        <!-- AdminLTE for demo purposes -->
+        <script src="/static/pms/dist/js/demo.js"></script>
+
+        <!-- Page specific script -->
+        <script>
+          /** ****** add active class and stay opened when selected Start ***** */
+          var url = window.location;
+          const allLinks = document.querySelectorAll('.nav-item a');
+          const currentLink = [...allLinks].filter(e => {
+            return e.href == url;
+          });
+
+          if (currentLink.length > 0) { //this filter because some links are not from menu
+              currentLink[0].classList.add("active");
+              currentLink[0].closest(".nav-treeview").style.display = "block";
+              //currentLink[0].closest(".has-treeview").classList.add("active");
+          }
+          /** ****** add active class and stay opened when selected End ***** */
+
+          /** ****** Initialize Select2 Elements Start ***** */
+          $(function () {
+              //Initialize Select2 Elements
+              $('.select2').select2()
+
+              //Initialize Select2 Elements
+              $('.select2bs4').select2({
+                theme: 'bootstrap4'
+              })
+          })
+          /** ****** Initialize Select2 Elements End ***** */
+
+        </script>
+
+    　{% endblock javascripts %}
+    {% endblock body %}
+
+  </body>
+</html>

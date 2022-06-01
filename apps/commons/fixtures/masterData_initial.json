@@ -1,0 +1,594 @@
+[
+    {
+        "model": "commons.status",
+        "pk": 1,
+        "fields": {
+            "status": "01.未着手",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.status",
+        "pk": 2,
+        "fields": {
+            "status": "02.進行中",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.status",
+        "pk": 3,
+        "fields": {
+            "status": "03.完了",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.status",
+        "pk": 4,
+        "fields": {
+            "status": "04.中止",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.stage",
+        "pk": 1,
+        "fields": {
+            "stage": "01.Plan",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.stage",
+        "pk": 2,
+        "fields": {
+            "stage": "02.Design",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.category",
+        "pk": 1,
+        "fields": {
+            "title": "01.課題",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.category",
+        "pk": 2,
+        "fields": {
+            "title": "02.TODO",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.team",
+        "pk": 1,
+        "fields": {
+            "team": "T1",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.team",
+        "pk": 2,
+        "fields": {
+            "team": "T2",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.subteam",
+        "pk": 1,
+        "fields": {
+            "subTeam": "ST1",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.subteam",
+        "pk": 2,
+        "fields": {
+            "subTeam": "ST2",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 1,
+        "fields": {
+            "delayReason": "クライアント起因",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 2,
+        "fields": {
+            "delayReason": "他ベンダ起因",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 3,
+        "fields": {
+            "delayReason": "他チーム起因",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 4,
+        "fields": {
+            "delayReason": "割り込み作業",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 5,
+        "fields": {
+            "delayReason": "予定工数不足",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 6,
+        "fields": {
+            "delayReason": "スキル不足",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 7,
+        "fields": {
+            "delayReason": "先行タスク待ち",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.delayreason",
+        "pk": 8,
+        "fields": {
+            "delayReason": "その他",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.worktype",
+        "pk": 1,
+        "fields": {
+            "workType": "作業タスク",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.worktype",
+        "pk": 2,
+        "fields": {
+            "workType": "内部レビュー",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.worktype",
+        "pk": 3,
+        "fields": {
+            "workType": "クライアントレビュー",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.worksite",
+        "pk": 1,
+        "fields": {
+            "workSite": "Japan",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.worksite",
+        "pk": 2,
+        "fields": {
+            "workSite": "ATCC",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.worksite",
+        "pk": 3,
+        "fields": {
+            "workSite": "ATCP",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.worksite",
+        "pk": 4,
+        "fields": {
+            "workSite": "ATCI",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 1,
+        "fields": {
+            "testType": "単体テスト(UT)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 2,
+        "fields": {
+            "testType": "内部結合テスト(ITA)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 3,
+        "fields": {
+            "testType": "内部結合テスト(ITB)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 4,
+        "fields": {
+            "testType": "システムテスト(ST)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 5,
+        "fields": {
+            "testType": "インフラテスト(INT)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 6,
+        "fields": {
+            "testType": "パフォーマンステスト(PT)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 7,
+        "fields": {
+            "testType": "システム運用テスト(OT)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.testtype",
+        "pk": 8,
+        "fields": {
+            "testType": "ユーザ受入テスト(UAT)",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.subsystemcategory",
+        "pk": 1,
+        "fields": {
+            "subSystemCategory": "XXサブシステム",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.subsystemcategory",
+        "pk": 2,
+        "fields": {
+            "subSystemCategory": "YYサブシステム",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.businesscategory",
+        "pk": 1,
+        "fields": {
+            "businessCategory": "AA業務",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.businesscategory",
+        "pk": 2,
+        "fields": {
+            "businessCategory": "BB業務",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.functionalcategory",
+        "pk": 1,
+        "fields": {
+            "functionalCategory": "A機能",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.functionalcategory",
+        "pk": 2,
+        "fields": {
+            "functionalCategory": "B機能",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.baccategory",
+        "pk": 1,
+        "fields": {
+            "bacCategory": "Target",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.baccategory",
+        "pk": 2,
+        "fields": {
+            "bacCategory": "Buffer",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.baccategory",
+        "pk": 3,
+        "fields": {
+            "bacCategory": "Contingency",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 1,
+        "fields": {
+            "riskIssueCategory": "10_リソース",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 2,
+        "fields": {
+            "riskIssueCategory": "20_コスト",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 3,
+        "fields": {
+            "riskIssueCategory": "30_スケジュール",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 4,
+        "fields": {
+            "riskIssueCategory": "40_Quality",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 5,
+        "fields": {
+            "riskIssueCategory": "51_インフラ",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 6,
+        "fields": {
+            "riskIssueCategory": "52_セキュリティ",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 7,
+        "fields": {
+            "riskIssueCategory": "61_技術‐アーキ",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 8,
+        "fields": {
+            "riskIssueCategory": "62_技術‐性能",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 9,
+        "fields": {
+            "riskIssueCategory": "63_技術‐コーディング",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 10,
+        "fields": {
+            "riskIssueCategory": "70_業務",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 11,
+        "fields": {
+            "riskIssueCategory": "80_トレーニング・標準・規約",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskissuecategory",
+        "pk": 12,
+        "fields": {
+            "riskIssueCategory": "99_その他",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 1,
+        "fields": {
+            "phase": "00_要件定義",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 2,
+        "fields": {
+            "phase": "01_基本設計",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 3,
+        "fields": {
+            "phase": "02_詳細設計",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 4,
+        "fields": {
+            "phase": "03_製造",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 5,
+        "fields": {
+            "phase": "04_単体試験",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 6,
+        "fields": {
+            "phase": "05_結合試験",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 7,
+        "fields": {
+            "phase": "06_総合試験",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 8,
+        "fields": {
+            "phase": "07_受入試験",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.phase",
+        "pk": 9,
+        "fields": {
+            "phase": "08_移行",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.impactscope",
+        "pk": 1,
+        "fields": {
+            "impactScope": "01 チーム内",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.impactscope",
+        "pk": 2,
+        "fields": {
+            "impactScope": "02 プロジェクト（ACN内）",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.impactscope",
+        "pk": 3,
+        "fields": {
+            "impactScope": "03 プロジェクト（他ベンダー含む）",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskscope",
+        "pk": 1,
+        "fields": {
+            "riskScope": "全体リスク",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskscope",
+        "pk": 2,
+        "fields": {
+            "riskScope": "個別リスク",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskresponsetype",
+        "pk": 1,
+        "fields": {
+            "riskResponseType": "01 回避",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskresponsetype",
+        "pk": 2,
+        "fields": {
+            "riskResponseType": "02 軽減",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskresponsetype",
+        "pk": 3,
+        "fields": {
+            "riskResponseType": "03 受容",
+            "comments": ""
+        }
+    },
+    {
+        "model": "commons.riskresponsetype",
+        "pk": 4,
+        "fields": {
+            "riskResponseType": "04 転嫁",
+            "comments": ""
+        }
+    }
+]

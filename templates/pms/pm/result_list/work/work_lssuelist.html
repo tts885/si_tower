@@ -1,0 +1,77 @@
+{% load widget_tweaks %}
+<!--<p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
+<p>■作業<code>(＃{{object.pk}}_{{object.name}})</code>と関連の課題（ISSUE）一覧</p>
+<!--<table id="" style="width: 100%;" class="table table-sm jambo_table bulk_action" >-->
+<form name="relationList_Form" method="POST">
+    {% csrf_token %}
+    <input type="hidden" id="data_pk" value={{object.pk}}>
+    <table id="serach_workdata" style="width: 100%;" class="table table-bordered table-sm">
+<!--    <table id="res_data" style="width: 100%;" class="table table-bordered table-sm">-->
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>題名</th>
+                    <th>担当者</th>
+                    <th>ステータス</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for record in result_list %}
+                <tr>
+                    <td><a href="{% url 'pms:issue_Update' record.pk %}">{{ record.pk }}</a></td>
+                    <td><a href="{% url 'pms:issue_Update' record.pk %}">[課題]_{{ record.name|truncatechars:10 }}</td>
+                    <td>{{ record.owner|default_if_none:""  }}</td>
+                    <td>{{ record.status|default_if_none:""   }}</td>
+                    <td><span class="input-group-append">
+                        <button type="button" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#modal-common" data-parent_id="{{ object.pk }}" data-child_id="{{ record.pk }}" data-url="{% url 'pms:removeRelation_work' object_pk=object.pk record_pk=record.pk %}" >
+                          関連解除
+                        </button></span>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+</form>
+
+<form name="issue_searchForm" action="" method="POST">
+  {% csrf_token %}
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="検索IDを入力" id="search_id">
+            </div>
+        </div>
+
+        <div class="col-9">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onClick="getModelInfo('/pms/work/getIssue/','#search_id')">
+                        <i class="success fa fa-search"></i><span> </span>課題検索</button>
+                <button id="addRelation" type="button" class="btn btn-primary" onClick="add_Relation('/pms/work/addRelation/','#search_id',{{object.pk}})" disabled>
+                        <i class="success fa fa-plus"></i><span></span>関連付け</button>
+                <a href="">>>>>高度検索</a>
+            </div>
+        </div>
+    </div>
+    <table id="" style="width: 100%;" class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="data_id">-</td>
+                    <td id="data_name">IDを入力して検索してください。</td>
+                </tr>
+            </tbody>
+    </table>
+</form>
+<!--依存解除を確認するモーダル ダイアログ-->
+{% include 'pms/common/_confirm_modal.html' %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}
