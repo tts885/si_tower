@@ -16,11 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
+from apps.t90_api.urls import router as user_app_router
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from rest_framework_jwt.views import obtain_jwt_token
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.t00_common.urls')),
-    path('', include('apps.t01_account.urls')),
+    path('', include('apps.t01_accounts.urls')),
     path('', include('apps.t02_manage.urls')),
+    path('', include('apps.t90_api.urls')),
+    path('api/', include(user_app_router.urls)),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('api-auth/', obtain_jwt_token),
 ]

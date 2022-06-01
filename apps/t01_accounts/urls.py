@@ -8,7 +8,7 @@ Created on Mon Jan  3 18:40:56 2022
 
 from django.urls import path
 
-app_name = 't00_account'
+app_name = 't00_accounts'
 
 urlpatterns = [
 

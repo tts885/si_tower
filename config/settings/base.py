@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'drf_spectacular',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.t00_common.apps.T00CommonConfig',
-    'apps.t01_account.apps.T01AccountConfig',
+    'apps.t01_accounts.apps.T01AccountsConfig',
     'apps.t02_manage.apps.T02ManageConfig',
 ]
 
@@ -137,3 +139,21 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Userモデルの代わりにCustomUserモデルを使用する
+AUTH_USER_MODEL = 't01_accounts.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    )
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Swagger Sample App',
+    'DESCRIPTION': 'https://qiita.com/mykysyk@github/items/fef6fb298393a029a5d4',
+    'VERSION': '2022.5.20',
+}
