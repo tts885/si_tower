@@ -6,14 +6,14 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
-# @login_required()
+@login_required()
 def demo(request):
     context = {}
     template = loader.get_template('pms/app/index.html')
     return HttpResponse(template.render(context, request))
 
 
-# @login_required()
+@login_required()
 def html(request):
     context = {}
     # The template to be loaded as per gentelella.
@@ -25,7 +25,7 @@ def html(request):
     return HttpResponse(template.render(context, request))
 
 
-# @login_required()
+@login_required()
 def index(request):
     # context = {}
     # template = loader.get_template('pms/portal/index.html')

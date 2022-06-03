@@ -153,8 +153,9 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Userモデルの代わりにCustomUserモデルを使用する
 AUTH_USER_MODEL = 'accounts.CustomUser'
+LOGIN_REDIRECT_URL = 'pms:index'
 
-LOGOUT_REDIRECT_URL = 'pms:index'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 LOGIN_URL = 'accounts:login'
 
 

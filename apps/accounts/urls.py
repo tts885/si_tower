@@ -14,10 +14,9 @@ app_name = 'accounts'
 
 urlpatterns = [
 
-    path('signup/', views.SignUpView.as_view(), name='signup'),
-    path('signup_success/', views.SignUpSuccessView.as_view(), name='signup_success'),
     # ログイン用のテンプレート(フォーム)をレンダリング
-    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    path('', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    path('signup/', views.SignUpView.as_view(), name='signup'),
     path('signup_success/', views.SignUpSuccessView.as_view(), name='signup_success'),
     path('logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
 

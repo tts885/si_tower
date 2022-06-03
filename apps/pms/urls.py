@@ -16,7 +16,7 @@ urlpatterns = [
     path('demo/', views.demo, name='demo'),
 
     # Portal
-    path('pms/', views.index, name='pms'),
+    path('pms/', views.index, name='index'),
     # path('', views.portal, name='portal'),
 
     # PM
