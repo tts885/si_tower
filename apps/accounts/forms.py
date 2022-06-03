@@ -12,5 +12,5 @@ class CustomUserCreationForm (UserCreationForm):
     
     class Meta:
         model =CustomUser
-        fields =('username','email','password1','password2')
+        fields =('username','email','password1','password2','Invitation_code')
 
