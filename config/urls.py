@@ -19,6 +19,7 @@ from django.conf.urls import include
 from apps.api.urls import router as user_app_router
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework_jwt.views import obtain_jwt_token
+from django.views.generic import TemplateView #追加
 
 
 urlpatterns = [
@@ -33,4 +34,7 @@ urlpatterns = [
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('api-auth/', obtain_jwt_token),
+
+    path('', TemplateView.as_view(template_name='index.html'), name='home'), # 追加
+    path('accounts/', include('allauth.urls')), # 追加
 ]

@@ -13,7 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #ファイル変更により修正
 
 
 # Quick-start development settings - unsuitable for production
@@ -46,6 +47,10 @@ INSTALLED_APPS = [
     'import_export',
     'widget_tweaks',
     'reversion',
+    'django.contrib.sites',  # 追加
+    'allauth',  # 追加
+    'allauth.account',  # 追加
+    'allauth.socialaccount',  # 追加
 ]
 
 MIDDLEWARE = [
@@ -63,7 +68,10 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates', 'allauth'),  # ログインテンプレート等などを置く場所
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -153,10 +161,6 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Userモデルの代わりにCustomUserモデルを使用する
 AUTH_USER_MODEL = 'accounts.CustomUser'
-LOGIN_REDIRECT_URL = 'pms:index'
-
-LOGOUT_REDIRECT_URL = 'accounts:login'
-LOGIN_URL = 'accounts:login'
 
 
 REST_FRAMEWORK = {
@@ -174,3 +178,15 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'https://qiita.com/mykysyk@github/items/fef6fb298393a029a5d4',
     'VERSION': '2022.5.20',
 }
+
+######Send Mail#######
+SITE_ID = 1
+LOGIN_URL = 'accounts:login'
+LOGOUT_REDIRECT_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'pms:index'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'devops.redmine@gmail.com'
+EMAIL_HOST_PASSWORD = 'unogjkgdzmibpjud'
+EMAIL_USE_TLS = True
+####GMail二段認証＋アプリパスワード設定

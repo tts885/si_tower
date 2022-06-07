@@ -1,5 +1,5 @@
 # Django
-# psycopg2
+psycopg2
 # gunicorn
 asgiref==3.5.2
 attrs==21.4.0
@@ -22,3 +22,4 @@ django-tabbed-admin==1.0.4
 django-import-export==2.7.1
 django-widget-tweaks==1.4.9
 django-reversion==4.0.1
+django-allauth==0.50.0 #Django認証認可library
