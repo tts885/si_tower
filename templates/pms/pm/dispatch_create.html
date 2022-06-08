@@ -37,7 +37,7 @@
                 <h3 class="card-title">Model</h3>
               </div>
               <!-- form start -->
-              <form action="{% url 'pms:select_model'　%}" method="POST" >
+              <form action="{% url 'pms:select_model' %}" method="POST" >
                 {% csrf_token %}
                 {{ formset.management_form }}
                 <div class="card-body">
@@ -54,7 +54,7 @@
 <!--              <button type="submit" class="btn btn-primary  float-right">検索条件指定へ</button>-->
                   <button type="submit" class="btn btn-primary float-right">新規データ作成へ</button>
                   <button type="submit" class="btn btn-success ">データ一括インポートへ</button>
-                  <a href="#/download"> ExcelTemplateDownload　<i class="fa fa-download"></i></a>
+                  <a href="#/download"> ExcelTemplateDownload <i class="fa fa-download"></i></a>
                 </div>
               </form>
             </div>

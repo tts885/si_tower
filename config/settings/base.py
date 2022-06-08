@@ -159,8 +159,8 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# Userモデルの代わりにCustomUserモデルを使用する
-AUTH_USER_MODEL = 'accounts.CustomUser'
+# # Userモデルの代わりにCustomUserモデルを使用する
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 REST_FRAMEWORK = {
@@ -180,7 +180,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 ######Send Mail#######
-SITE_ID = 1
+# SITE_ID = 1
 LOGIN_URL = 'accounts:login'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'pms:index'
@@ -190,3 +190,35 @@ EMAIL_HOST_USER = 'devops.redmine@gmail.com'
 EMAIL_HOST_PASSWORD = 'unogjkgdzmibpjud'
 EMAIL_USE_TLS = True
 ####GMail二段認証＋アプリパスワード設定
+
+###### Allauth Settings Start #######
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'  # メールアドレス認証に変更する設定
+ACCOUNT_USERNAME_REQUIRED = False  # サインナップ、ログイン時のユーザーネーム認証をキャンセル
+ 
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # サインアップにメールアドレス確認を使用
+ACCOUNT_EMAIL_REQUIRED = True
+
+# ユーザーモデルの拡張(customuser)
+# Userモデルの代わりにCustomUserモデルを使用する
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#django-allauthがsitesフレームワークを使っているため
+SITE_ID = 1
+
+# 確認を行わずログアウトする設定
+ACCOUNT_LOGOUT_ON_GET = True 
+
+# #signupformを指定
+ACCOUNT_FORMS = {
+    'signup' : 'apps.accounts.forms.CustomUserCreationForm',
+}
+# #signupformからの情報をcustomusermodelに保存するのに必要
+ACCOUNT_ADAPTER = 'apps.accounts.adapter.AccountAdapter'
+
+
+###### Allauth Settings End #######

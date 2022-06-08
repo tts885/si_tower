@@ -6,33 +6,33 @@
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-          <form action="{#% url 'pms:issue_Create'　%#}" method="POST" class="form-horizontal form-label-left">
+          <form action="{#% url 'pms:issue_Create' %#}" method="POST" class="form-horizontal form-label-left">
                     {% csrf_token %}
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">題名</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            {% render_field form.name class="form-control"　autocomplete="off" %}
+                            {% render_field form.name class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">ステータス</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.status class="form-control"　autocomplete="off" %}
+                            {% render_field form.status class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">担当者</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.owner class="form-control"　autocomplete="off" %}
+                            {% render_field form.owner class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">対象バージョン</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.version class="form-control"　autocomplete="off" %}
+                            {% render_field form.version class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
@@ -67,21 +67,21 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">予定工数(h)</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.estimate class="form-control"　autocomplete="off" %}
+                            {% render_field form.estimate class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">残作業時間(h)</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.remainingWorkTime class="form-control"　autocomplete="off" %}
+                            {% render_field form.remainingWorkTime class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">起票者</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.creater class="form-control"　autocomplete="off" %}
+                            {% render_field form.creater class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
@@ -104,21 +104,21 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">チーム</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.team class="form-control"　autocomplete="off" %}
+                            {% render_field form.team class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">SUBチーム</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.subTeam class="form-control"　autocomplete="off" %}
+                            {% render_field form.subTeam class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク種別</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.riskScope class="form-control"　autocomplete="off" %}
+                            {% render_field form.riskScope class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
@@ -164,7 +164,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク対応タイプ</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.riskResponseType class="form-control"　autocomplete="off" %}
+                            {% render_field form.riskResponseType class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
@@ -179,7 +179,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">リスク対応に必要なコスト</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.costs class="form-control"　autocomplete="off" %}
+                            {% render_field form.costs class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 
@@ -266,7 +266,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2 col-sm-3 col-xs-12">遅延理由区分</label>
                         <div class="col-md-2 col-sm-9 col-xs-12">
-                            {% render_field form.delayReason class="form-control"　autocomplete="off" %}
+                            {% render_field form.delayReason class="form-control" autocomplete="off" %}
                         </div>
                     </div>
 

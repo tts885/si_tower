@@ -51,7 +51,7 @@
                         {% if request.session.isUpdate %}
                         <form action="" method="POST">
                             {% else %}
-                            <form action="{% url 'pms:work_Create'　%}" method="POST">
+                            <form action="{% url 'pms:work_Create' %}" method="POST">
                                 {% endif %}
 
                                 {% csrf_token %}
