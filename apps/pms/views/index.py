@@ -31,6 +31,6 @@ def index(request):
     # template = loader.get_template('pms/portal/index.html')
     # return HttpResponse(template.render(context, request))
 
-    sample_data = {'sample': 'サンプル'}
-    # return render(request, 'hello_world.html', sample_data)
-    return render(request, os.path.join('pms/index.html'), sample_data)
+    index_data = {'index_data': 'xxxx_data'}
+
+    return render(request, os.path.join('pms/index.html'), index_data)
