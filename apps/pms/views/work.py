@@ -23,7 +23,20 @@ from apps.pms.forms import SelectModelFrom
 from apps.pms.constant.common_cons import *
 from apps.pms.constant import common_messages
 from apps.commons.models.Status import Status
+from reversion.models import Version,Revision
+from django.shortcuts import get_object_or_404
 
+
+def getfnames(self, models):
+        meta_fields = models._meta.get_fields()
+        print(meta_fields)  # ※1
+
+        ret = list()
+        for i, meta_field in enumerate(meta_fields):
+            if i > 0:
+                ret.append(meta_field.name)
+        print(ret)   # ※2
+        return ret
 
 @method_decorator(login_required, name='dispatch')
 class SearchWork(View):
@@ -162,6 +175,7 @@ class UpdateWork(UpdateView):
     # 1ページに表示するレコードの件数
     paginate_by = 1
 
+
     def get_success_url(self):
         return reverse('pms:work_Update', kwargs={'pk': self.object.pk})
 
@@ -169,31 +183,38 @@ class UpdateWork(UpdateView):
         result = Work.objects.get(pk=self.object.pk)
         issue_list = result.issue.all()
 
+        instance = get_object_or_404(Work, id= self.object.pk)
+        versions = Version.objects.get_for_object(instance)
+        # revision = versions.revision
+   
+        new_versions = list(versions)
+
         # ctx = super(UpdateView, self).get_context_data(**kwargs)
         ctx = super().get_context_data(**kwargs)
         ctx.update(dict(const=Const))
-        ctx.update({'const': Const, 'model_name': Const.MODEL_WORK, 'result_list': issue_list})
-        # ctx.update({'const': Const, 'model_name': Const.MODEL_WORK})
+        ctx.update({'const': Const, 'model_name': Const.MODEL_WORK, 'result_list': issue_list,'versions':versions})
 
         return ctx
 
     def form_valid(self, form):
+        work = Work.objects.get(pk=self.object.pk)
         # commit=FalseにしてPOSTされたデータを取得
         postdata = form.save(commit=False)
         # ユーザーのidを取得してモデルのuserフィールドに格納
         # postdata.system_user = self.request.user
-
+        work = postdata
+        work_change = work.tracker.changed()
         # データをデータベースに登録
         postdata.save()
 
+
         with reversion.create_revision():
             # Save a new model instance.
-
-            work = postdata
-            work.save()
+            formdata = postdata
+            formdata.save()
             # Store some meta-information.
             reversion.set_user(self.request.user)
-            reversion.set_comment("Update revision 1")
+            reversion.set_comment(work_change)
 
         # if SESSION_IS_UPDATE in self.request.session:
         #     del self.request.session[SESSION_IS_UPDATE]
@@ -242,6 +263,14 @@ class AddRelation_toWork(View):
 
                 issue = Issue.objects.get(pk=request.POST["search_id"])
                 work.issue.add(issue)
+
+                with reversion.create_revision():
+                    # Save a new model instance.
+                    formdata = work
+                    formdata.save()
+                    # Store some meta-information.
+                    reversion.set_user(request.user)
+                    reversion.set_comment('課題(' + request.POST["search_id"] + ')の関連付けを追加しました。')
 
             else:
                 issue = None

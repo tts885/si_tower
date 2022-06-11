@@ -23,3 +23,4 @@ django-import-export==2.7.1
 django-widget-tweaks==1.4.9
 django-reversion==4.0.1
 django-allauth==0.50.0 #Django認証認可library
+django-model-utils==4.2.0 #

@@ -43,22 +43,22 @@
     </a>
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <a class="dropdown-item dropdown-header">
-        LoginUser : {{user.username}}
+        ログインユーザー{{user.username}}
       </a>
       <div class="dropdown-divider"></div>
       <a href="#" class="dropdown-item">
-        <i class="fa fa-address-card mr-2"></i>Profile & account
+        <i class="fa fa-address-card mr-2"></i>プロファイル＆アカウント
       </a>
       <a href="#" class="dropdown-item">
-        <i class="fa fa-cog mr-2" aria-hidden="true"></i>Settings
+        <i class="fa fa-cog mr-2" aria-hidden="true"></i>設定
       </a>
       <div class="dropdown-divider"></div>
       <a href="/accounts/password/set/" class="dropdown-item">
-        <i class="fa fa-key mr-2" aria-hidden="true"></i>Change Password
+        <i class="fa fa-key mr-2" aria-hidden="true"></i>パスワード変更
       </a>
       <div class="dropdown-divider"></div>
       <a href="{% url 'accounts:logout' %}" class="dropdown-item dropdown-footer">
-        <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>Logout
+        <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>ログアウト
       </a>
     </div>
   </li>

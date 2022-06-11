@@ -1,4 +1,5 @@
 from django.db import models
+from model_utils import FieldTracker
 from apps.commons.models.Status import Status
 from apps.commons.models.Teams import Team, SubTeam
 from apps.commons.models.DelayReason import DelayReason
@@ -6,8 +7,10 @@ from apps.commons.models.WorkType import WorkType
 from apps.commons.models.WorkSite import WorkSite
 from apps.pms.models.Issue import Issue
 from apps.accounts.models import CustomUser
+import reversion
 
 
+@reversion.register()
 class Work(models.Model):
     class Meta:
         app_label = 'pms'
@@ -138,6 +141,8 @@ class Work(models.Model):
         blank=True, null=True,
         default='',
     )
+
+    tracker = FieldTracker()
 
     def __str__(self):
         return self.name

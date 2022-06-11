@@ -1,10 +1,5 @@
 $(function () {
 
-});
-
-
-$(function () {
-
 /** ****** add active class and stay opened when selected Start ***** */
 var url = window.location;
 const allLinks = document.querySelectorAll('.nav-item a');
@@ -91,6 +86,33 @@ if (currentLink.length > 0) { //this filter because some links are not from menu
     },
     }).buttons().container().appendTo('#serach_workdata_wrapper .col-md-6:eq(0)');
 
+    $("#get_historydata").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      "buttons": ["copy","excel","print", "colvis"],
+      language: {
+        "decimal": ".",
+        "emptyTable":     "表示するデータがありません。",
+        "thousands": ",",
+        "sProcessing": "処理中...",
+        "sLengthMenu": "_MENU_ 件表示",
+        "sZeroRecords": "データはありません。",
+        "sInfo": " _TOTAL_ 件中 _START_ から _END_ まで表示",
+        "sInfoEmpty": " 0 件中 0 から 0 まで表示",
+        "sInfoFiltered": "（全 _MAX_ 件より抽出）",
+        "sInfoPostFix": "",
+        "sSearch": "検索:",
+        "sUrl": "",
+        "oPaginate": {
+          "sFirst": "先頭",
+          "sPrevious": "前",
+          "sNext": "次",
+          "sLast": "最終"
+        }
+    },
+    }).buttons().container().appendTo('#serach_workdata_wrapper .col-md-6:eq(0)');
+
+  
     $("#res_data").DataTable({
       //"dom": 'Bfrtip',
       "responsive": true,
