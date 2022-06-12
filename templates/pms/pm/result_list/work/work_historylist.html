@@ -1,0 +1,26 @@
+{% load widget_tweaks %}
+<p>■作業<code>(＃{{object.pk}}_{{object.name}})</code>と関連の課題（ISSUE）一覧</p>
+<form name="relationList_Form" method="POST">
+    {% csrf_token %}
+    <input type="hidden" id="data_pk" value={{object.pk}}>
+    <table id="get_historydata" style="width: 100%;" class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>変更時刻</th>
+                    <th>変更ユーザー</th>
+                    <th>変更内容</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for record in versions %}
+                <tr>
+                    <td><a href="{% url 'pms:issue_Update' record.pk %}">{{ record.pk }}</a></td>
+                    <td><a href="{% url 'pms:issue_Update' record.pk %}">{{ record.revision.date_created}}</td>
+                    <td>{{ record.revision.user  }}</td>
+                    <td>{{ record.revision.comment|default_if_none:""   }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+</form>
