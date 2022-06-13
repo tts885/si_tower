@@ -44,7 +44,7 @@ class SelectModelFrom(forms.Form):
 
     modelNames = []
     for i, model in enumerate(apps.all_models['pms']):
-        print(apps.get_app_config('pms').get_model(model)._meta.verbose_name)
+        # print(apps.get_app_config('pms').get_model(model)._meta.verbose_name)
 
         modelNames.append(
             # [i, str(i + 1).zfill(2) + '|' + apps.get_app_config('pms').get_model(model)._meta.verbose_name])
