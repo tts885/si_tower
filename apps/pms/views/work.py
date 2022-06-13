@@ -5,6 +5,7 @@ import apps.pms.forms
 from django.forms.models import model_to_dict
 from django.contrib import messages
 from django.core import serializers
+from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -173,7 +174,7 @@ class UpdateWork(UpdateView):
     template_name = 'pms/pm/dispatch_update.html'
     # work = Work()
     # 1ページに表示するレコードの件数
-    paginate_by = 1
+    # paginate_by = 1
 
 
     def get_success_url(self):
@@ -197,15 +198,30 @@ class UpdateWork(UpdateView):
         return ctx
 
     def form_valid(self, form):
-        work = Work.objects.get(pk=self.object.pk)
+        # work = Work.objects.get(pk=self.object.pk)
+        work = Work.objects.filter(pk=self.object.pk)
+  
         # commit=FalseにしてPOSTされたデータを取得
-        postdata = form.save(commit=False)
+        # postdata = json.load(form.save(commit=False))
+        work_new = json.dumps(self.request.POST)
+
         # ユーザーのidを取得してモデルのuserフィールドに格納
         # postdata.system_user = self.request.user
-        work = postdata
-        work_change = work.tracker.changed()
+        # work_old = work
+        # work_new = postdata
+        # work_change = work_new.tracker.changed()
         # データをデータベースに登録
-        postdata.save()
+        # postdata.save()
+
+
+        work_old = serializers.serialize("json", work)
+        # serializers.serialize("json",work_new, fields=('id','name'))
+
+        # json_serializer = serializers.get_serializer('json')()
+        # data = serializers.serialize('json', work_old, fields=('name','id'))
+
+
+        diff = set(work_old).difference(set(work_new))
 
 
         with reversion.create_revision():
