@@ -28,15 +28,14 @@ from reversion.models import Version,Revision
 from django.shortcuts import get_object_or_404
 
 
-def getfnames(self, models):
+def get_verbose_names(self,json_data, models):
         meta_fields = models._meta.get_fields()
-        print(meta_fields)  # ※1
-
         ret = list()
         for i, meta_field in enumerate(meta_fields):
             if i > 0:
-                ret.append(meta_field.name)
-        print(ret)   # ※2
+                for json_key in json_data:
+                    if json_key.replace('_id','') == meta_field.name:
+                        ret.append(meta_field.verbose_name)
         return ret
 
 @method_decorator(login_required, name='dispatch')
@@ -133,7 +132,6 @@ class CreateWork(CreateView):
         # ユーザーのidを取得してモデルのuserフィールドに格納
         # postdata.system_user = self.request.user
         # データをデータベースに登録
-        postdata.save()
 
         with reversion.create_revision():
             # Save a new model instance.
@@ -186,7 +184,6 @@ class UpdateWork(UpdateView):
 
         instance = get_object_or_404(Work, id= self.object.pk)
         versions = Version.objects.get_for_object(instance)
-        # revision = versions.revision
    
         new_versions = list(versions)
 
@@ -198,31 +195,17 @@ class UpdateWork(UpdateView):
         return ctx
 
     def form_valid(self, form):
-        # work = Work.objects.get(pk=self.object.pk)
-        work = Work.objects.filter(pk=self.object.pk)
-  
+        work = Work.objects.get(pk=self.object.pk)
         # commit=FalseにしてPOSTされたデータを取得
-        # postdata = json.load(form.save(commit=False))
-        work_new = json.dumps(self.request.POST)
-
+        postdata = form.save(commit=False)
         # ユーザーのidを取得してモデルのuserフィールドに格納
         # postdata.system_user = self.request.user
-        # work_old = work
-        # work_new = postdata
-        # work_change = work_new.tracker.changed()
+        work = postdata
+        work_change = work.tracker.changed()
         # データをデータベースに登録
-        # postdata.save()
+        postdata.save()
 
-
-        work_old = serializers.serialize("json", work)
-        # serializers.serialize("json",work_new, fields=('id','name'))
-
-        # json_serializer = serializers.get_serializer('json')()
-        # data = serializers.serialize('json', work_old, fields=('name','id'))
-
-
-        diff = set(work_old).difference(set(work_new))
-
+        changed_verbose_names =get_verbose_names(self,work_change,Work)
 
         with reversion.create_revision():
             # Save a new model instance.
@@ -230,7 +213,7 @@ class UpdateWork(UpdateView):
             formdata.save()
             # Store some meta-information.
             reversion.set_user(self.request.user)
-            reversion.set_comment(work_change)
+            reversion.set_comment('[' +  ']、['.join(changed_verbose_names) + ']を変更されている')
 
         # if SESSION_IS_UPDATE in self.request.session:
         #     del self.request.session[SESSION_IS_UPDATE]
