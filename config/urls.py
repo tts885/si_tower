@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
-from apps.api.urls import router as user_app_router
+# from apps.api.urls import router
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework_jwt.views import obtain_jwt_token
 from django.views.generic import TemplateView #追加
@@ -27,8 +27,9 @@ urlpatterns = [
     path('', include('apps.commons.urls')),
     path('', include('apps.accounts.urls')),
     path('', include('apps.pms.urls')),
-    path('', include('apps.api.urls')),
-    path('api/', include(user_app_router.urls)),
+    # path('', include('apps.api.urls')),
+    # path('api/', include(router.urls)),
+    path('api/', include('apps.api.urls')),
 
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

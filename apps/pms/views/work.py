@@ -195,30 +195,31 @@ class UpdateWork(UpdateView):
         return ctx
 
     def form_valid(self, form):
-        work = Work.objects.get(pk=self.object.pk)
+        work = Work()
         # commit=FalseにしてPOSTされたデータを取得
         postdata = form.save(commit=False)
         # ユーザーのidを取得してモデルのuserフィールドに格納
         # postdata.system_user = self.request.user
         work = postdata
         work_change = work.tracker.changed()
-        # データをデータベースに登録
-        postdata.save()
 
-        changed_verbose_names =get_verbose_names(self,work_change,Work)
+        if len(work_change) is not 0:
+            # データをデータベースに登録
+            postdata.save()
+            changed_verbose_names =get_verbose_names(self,work_change,Work)
 
-        with reversion.create_revision():
-            # Save a new model instance.
-            formdata = postdata
-            formdata.save()
-            # Store some meta-information.
-            reversion.set_user(self.request.user)
-            reversion.set_comment('[' +  ']、['.join(changed_verbose_names) + ']を変更されている')
+            with reversion.create_revision():
+                # Save a new model instance.
+                formdata = postdata
+                formdata.save()
+                # Store some meta-information.
+                reversion.set_user(self.request.user)
+                reversion.set_comment('[' +  ']、['.join(changed_verbose_names) + ']を変更されている')
 
-        # if SESSION_IS_UPDATE in self.request.session:
-        #     del self.request.session[SESSION_IS_UPDATE]
+            # if SESSION_IS_UPDATE in self.request.session:
+            #     del self.request.session[SESSION_IS_UPDATE]
 
-        messages.add_message(self.request, messages.SUCCESS, common_messages.UPDATE_RECORD_SUCCESS)
+            messages.add_message(self.request, messages.SUCCESS, common_messages.UPDATE_RECORD_SUCCESS)
         # 戻り値はスーパークラスのform_valid()の戻り値(HttpResponseRedirect)
         return super().form_valid(form)
 

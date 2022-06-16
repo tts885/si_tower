@@ -20,6 +20,8 @@ urlpatterns = [
     # path('', views.portal, name='portal'),
 
     # PM
+    path('pms/dashboard/', views.dashboard, name='dashboard'),
+
     # 01>>>Select Model
     path('pms/select_model/', views.select_model, name='select_model'),
 

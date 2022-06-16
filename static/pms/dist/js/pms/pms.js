@@ -60,7 +60,8 @@ if (currentLink.length > 0) { //this filter because some links are not from menu
 /** ****** Initialize easyMDE Start ***** */
 
 /** ****** Initialize DataTable Start ***** */
-    $("#serach_workdata").DataTable({
+    $("#serach_data").DataTable({
+      pageLength: 20,
       "responsive": true, "lengthChange": false, "autoWidth": false,
       //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       "buttons": ["copy","excel","print", "colvis"],
@@ -84,7 +85,7 @@ if (currentLink.length > 0) { //this filter because some links are not from menu
           "sLast": "最終"
         }
     },
-    }).buttons().container().appendTo('#serach_workdata_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#serach_data_wrapper .col-md-6:eq(0)');
 
     $("#get_historydata").DataTable({
       pageLength: 15,

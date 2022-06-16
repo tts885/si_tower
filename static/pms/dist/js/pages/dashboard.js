@@ -29,87 +29,87 @@ $(function () {
   })
 
   // bootstrap WYSIHTML5 - text editor
-  $('.textarea').summernote()
+//  $('.textarea').summernote()
 
-  $('.daterange').daterangepicker({
-    ranges: {
-      Today: [moment(), moment()],
-      Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-      'This Month': [moment().startOf('month'), moment().endOf('month')],
-      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-    },
-    startDate: moment().subtract(29, 'days'),
-    endDate: moment()
-  }, function (start, end) {
-    // eslint-disable-next-line no-alert
-    alert('You chose: ' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-  })
+//"  $('.daterange').daterangepicker({
+//    ranges: {
+//      Today: [moment(), moment()],
+//      Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+//      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+//      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+//      'This Month': [moment().startOf('month'), moment().endOf('month')],
+//      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+//    },
+//    startDate: moment().subtract(29, 'days'),
+//    endDate: moment()
+//  }, function (start, end) {
+//    // eslint-disable-next-line no-alert
+//    alert('You chose: ' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+//  })"
 
-  /* jQueryKnob */
-  $('.knob').knob()
-
-  // jvectormap data
-  var visitorsData = {
-    US: 398, // USA
-    SA: 400, // Saudi Arabia
-    CA: 1000, // Canada
-    DE: 500, // Germany
-    FR: 760, // France
-    CN: 300, // China
-    AU: 700, // Australia
-    BR: 600, // Brazil
-    IN: 800, // India
-    GB: 320, // Great Britain
-    RU: 3000 // Russia
-  }
+//  /* jQueryKnob */
+//  $('.knob').knob()
+//
+//  // jvectormap data
+//  var visitorsData = {
+//    US: 398, // USA
+//    SA: 400, // Saudi Arabia
+//    CA: 1000, // Canada
+//    DE: 500, // Germany
+//    FR: 760, // France
+//    CN: 300, // China
+//    AU: 700, // Australia
+//    BR: 600, // Brazil
+//    IN: 800, // India
+//    GB: 320, // Great Britain
+//    RU: 3000 // Russia
+//  }
   // World map by jvectormap
-  $('#world-map').vectorMap({
-    map: 'usa_en',
-    backgroundColor: 'transparent',
-    regionStyle: {
-      initial: {
-        fill: 'rgba(255, 255, 255, 0.7)',
-        'fill-opacity': 1,
-        stroke: 'rgba(0,0,0,.2)',
-        'stroke-width': 1,
-        'stroke-opacity': 1
-      }
-    },
-    series: {
-      regions: [{
-        values: visitorsData,
-        scale: ['#ffffff', '#0154ad'],
-        normalizeFunction: 'polynomial'
-      }]
-    },
-    onRegionLabelShow: function (e, el, code) {
-      if (typeof visitorsData[code] !== 'undefined') {
-        el.html(el.html() + ': ' + visitorsData[code] + ' new visitors')
-      }
-    }
-  })
+//  $('#world-map').vectorMap({
+//    map: 'usa_en',
+//    backgroundColor: 'transparent',
+//    regionStyle: {
+//      initial: {
+//        fill: 'rgba(255, 255, 255, 0.7)',
+//        'fill-opacity': 1,
+//        stroke: 'rgba(0,0,0,.2)',
+//        'stroke-width': 1,
+//        'stroke-opacity': 1
+//      }
+//    },
+//    series: {
+//      regions: [{
+//        values: visitorsData,
+//        scale: ['#ffffff', '#0154ad'],
+//        normalizeFunction: 'polynomial'
+//      }]
+//    },
+//    onRegionLabelShow: function (e, el, code) {
+//      if (typeof visitorsData[code] !== 'undefined') {
+//        el.html(el.html() + ': ' + visitorsData[code] + ' new visitors')
+//      }
+//    }
+//  })
 
   // Sparkline charts
-  var sparkline1 = new Sparkline($('#sparkline-1')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
-  var sparkline2 = new Sparkline($('#sparkline-2')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
-  var sparkline3 = new Sparkline($('#sparkline-3')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
-
-  sparkline1.draw([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021])
-  sparkline2.draw([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921])
-  sparkline3.draw([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21])
+//  var sparkline1 = new Sparkline($('#sparkline-1')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
+//  var sparkline2 = new Sparkline($('#sparkline-2')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
+//  var sparkline3 = new Sparkline($('#sparkline-3')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
+//
+//  sparkline1.draw([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021])
+//  sparkline2.draw([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921])
+//  sparkline3.draw([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21])
 
   // The Calender
-  $('#calendar').datetimepicker({
-    format: 'L',
-    inline: true
-  })
+//  $('#calendar').datetimepicker({
+//    format: 'L',
+//    inline: true
+//  })
 
   // SLIMSCROLL FOR CHAT WIDGET
-  $('#chat-box').overlayScrollbars({
-    height: '250px'
-  })
+//  $('#chat-box').overlayScrollbars({
+//    height: '250px'
+//  })
 
   /* Chart.js Charts */
   // Sales chart
@@ -128,7 +128,7 @@ $(function () {
         pointStrokeColor: 'rgba(60,141,188,1)',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(60,141,188,1)',
-        data: [28, 48, 40, 19, 86, 27, 90]
+        data: data
       },
       {
         label: 'Electronics',
@@ -174,6 +174,7 @@ $(function () {
 
   // Donut Chart
   var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
+
   var pieData = {
     labels: [
       'Instore Sales',
@@ -198,13 +199,13 @@ $(function () {
   // You can switch between pie and douhnut using the method below.
   // eslint-disable-next-line no-unused-vars
   var pieChart = new Chart(pieChartCanvas, { // lgtm[js/unused-local-variable]
-    type: 'doughnut',
+    type: 'pie',
     data: pieData,
     options: pieOptions
   })
 
   // Sales graph chart
-  var salesGraphChartCanvas = $('#line-chart').get(0).getContext('2d')
+  //  var salesGraphChartCanvas = $('#line-chart').get(0).getContext('2d')
   // $('#revenue-chart').get(0).getContext('2d');
 
   var salesGraphChartData = {
@@ -221,7 +222,7 @@ $(function () {
         pointHoverRadius: 7,
         pointColor: '#efefef',
         pointBackgroundColor: '#efefef',
-        data: [2666, 2778, 4912, 3767, 6810, 5670, 4820, 15073, 10687, 8432]
+        data: []
       }
     ]
   }
@@ -257,11 +258,140 @@ $(function () {
     }
   }
 
-  // This will get the first returned node in the jQuery collection.
-  // eslint-disable-next-line no-unused-vars
-  var salesGraphChart = new Chart(salesGraphChartCanvas, { // lgtm[js/unused-local-variable]
-    type: 'line',
-    data: salesGraphChartData,
-    options: salesGraphChartOptions
-  })
+// This will get the first returned node in the jQuery collection.
+// eslint-disable-next-line no-unused-vars
+//  var salesGraphChart = new Chart(salesGraphChartCanvas, { // lgtm[js/unused-local-variable]
+//    type: 'line',
+//    data: salesGraphChartData,
+//    options: salesGraphChartOptions
+//  })
+
+
+
+
 })
+
+/// ===グラフ描画Start=== ///
+ var endpoint = '/api/chart';
+
+ $.ajax({
+   method: "GET",
+   url: endpoint,
+   success: function(data) {
+     drawLineGraph(data, 'lineChart');
+     drawBarGraph(data, 'barChart');
+     drawWidget(data);
+     console.log("drawing");
+   },
+   error: function(error_data) {
+     console.log(error_data);
+   }
+ })
+ 
+ function drawLineGraph(data, id) {
+   var labels = data.labels;
+   var chartLabel = data.chartLabel;
+   var chartdata = data.chartdata;
+   var ctx = document.getElementById(id).getContext('2d');
+   var chart = new Chart(ctx, {
+     // The type of chart we want to create
+     type: 'line',
+ 
+     // The data for our dataset
+     data: {
+       labels: labels,
+       datasets: [{
+         label: chartLabel,
+         backgroundColor: 'rgb(255, 100, 200)',
+         borderColor: 'rgb(55, 99, 132)',
+         data: chartdata,
+       },
+       {
+         label: chartLabel,
+         backgroundColor: 'rgb(255, 100, 200)',
+         borderColor: 'rgb(55, 99, 132)',
+         data: chartdata,
+       }]
+     },
+ 
+     // Configuration options go here
+     options: {
+      responsive: true,
+      maintainAspectRatio: false,
+       scales: {
+        y: {
+          beginAtZero: true
+        },
+         xAxes: [{
+           display: true
+         }],
+         yAxes: [{
+           ticks: {
+             beginAtZero: true
+           }
+         }]
+       }
+     }
+ 
+   });
+ }
+ 
+ function drawBarGraph(data, id) {
+   var labels = data.labels;
+   var chartLabel = data.chartLabel;
+   var chartdata = data.chartdata;
+   var ctx = document.getElementById(id).getContext('2d');
+   var myChart = new Chart(ctx, {
+     type: 'pie',
+     data: {
+       labels: labels,
+       datasets: [{
+         label: chartLabel,
+         data: chartdata,
+         backgroundColor: [
+           'rgba(255, 99, 132, 0.2)',
+           'rgba(54, 162, 235, 0.2)',
+           'rgba(255, 206, 86, 0.2)',
+           'rgba(75, 192, 192, 0.2)',
+           'rgba(153, 102, 255, 0.2)',
+           'rgba(255, 159, 64, 0.2)'
+         ],
+         borderColor: [
+           'rgba(255, 99, 132, 1)',
+           'rgba(54, 162, 235, 1)',
+           'rgba(255, 206, 86, 1)',
+           'rgba(75, 192, 192, 1)',
+           'rgba(153, 102, 255, 1)',
+           'rgba(255, 159, 64, 1)'
+         ],
+         borderWidth: 1
+       }]
+     },
+     // Configuration options go here
+     options: {
+      responsive: true,
+      maintainAspectRatio: false,
+       scales: {
+        y: {
+          beginAtZero: true
+        },
+         xAxes: [{
+           display: true
+         }],
+         yAxes: [{
+           ticks: {
+             beginAtZero: true
+           }
+         }]
+       }
+     }
+   });
+ }
+
+ function drawWidget(data) {
+  var total_work = document.getElementById('total_work');
+  total_work.innerText = data.total_work
+
+}
+
+/// ===グラフ描画End=== ///

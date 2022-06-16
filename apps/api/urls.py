@@ -14,8 +14,9 @@ app_name = 'api'
 
 urlpatterns = [
     # path('', views.index, name='index'),
+    path('chart', views.ChartData.as_view()),
 
     ]
-router = routers.DefaultRouter()
-router.register(r'user', views.UserViewSet)
-router.register(r'work', views.WorkViewSet)
+# router = routers.DefaultRouter()
+# router.register(r'user', views.UserViewSet)
+# router.register(r'work', views.WorkViewSet)
