@@ -289,14 +289,14 @@ $.ajax({
 })
 var now = new Date();
 function drawLineGraph(data, id) {
-  var planDate = data.labels.plan;
+  var calendar = data.labels.calendar;
   var planCount = data.labels.planCount;
   var actualCount = data.labels.actualCount;
   var chartLabel = "予定";
 
 
   var Year = now.getFullYear();
-  var Month = ('00' + (now.getMonth()+1)).slice(-2);
+  var Month = ('00' + (now.getMonth() + 1)).slice(-2);
   var Day = ('00' + now.getDate()).slice(-2);
   date = Year + "-" + Month + "-" + Day
 
@@ -309,7 +309,7 @@ function drawLineGraph(data, id) {
 
     // The data for our dataset
     data: {
-      labels: planDate,
+      labels: calendar,
       datasets: [{
         label: chartLabel,
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -327,19 +327,19 @@ function drawLineGraph(data, id) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-       scales: {
+      scales: {
         y: {
           beginAtZero: true
         },
-         xAxes: [{
-           display: true
-         }],
-         yAxes: [{
-           ticks: {
-             beginAtZero: true
-           }
-         }]
-       },
+        xAxes: [{
+          display: true
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      },
 
       annotation: {
         annotations: [
@@ -353,7 +353,7 @@ function drawLineGraph(data, id) {
             borderWidth: 2,
 
             label: {
-              content: "本日" +  "(" + date+  ")",
+              content: "本日" + "(" + date + ")",
               enabled: true,
               position: "top"
             }
