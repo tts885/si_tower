@@ -59,7 +59,7 @@ class Work(models.Model):
         verbose_name='予定開始日', blank=True, null=True,
     )
 
-    planEndDate = models.DateField(
+    planEndDate = models.DateTimeField(
         verbose_name='予定終了日', blank=True, null=True,
     )
 
@@ -67,7 +67,7 @@ class Work(models.Model):
         verbose_name='実績開始日', blank=True, null=True,
     )
 
-    actualEndDate = models.DateField(
+    actualEndDate = models.DateTimeField(
         verbose_name='実績終了日', blank=True, null=True,
     )
 

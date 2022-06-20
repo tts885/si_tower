@@ -272,123 +272,165 @@ $(function () {
 })
 
 /// ===グラフ描画Start=== ///
- var endpoint = '/api/chart';
+var endpoint = '/api/chart';
 
- $.ajax({
-   method: "GET",
-   url: endpoint,
-   success: function(data) {
-     drawLineGraph(data, 'lineChart');
-     drawBarGraph(data, 'barChart');
-     drawWidget(data);
-     console.log("drawing");
-   },
-   error: function(error_data) {
-     console.log(error_data);
-   }
- })
- 
- function drawLineGraph(data, id) {
-   var labels = data.labels;
-   var chartLabel = data.chartLabel;
-   var chartdata = data.chartdata;
-   var ctx = document.getElementById(id).getContext('2d');
-   var chart = new Chart(ctx, {
-     // The type of chart we want to create
-     type: 'line',
- 
-     // The data for our dataset
-     data: {
-       labels: labels,
-       datasets: [{
-         label: chartLabel,
-         backgroundColor: 'rgb(255, 100, 200)',
-         borderColor: 'rgb(55, 99, 132)',
-         data: chartdata,
+$.ajax({
+  method: "GET",
+  url: endpoint,
+  success: function (data) {
+    drawLineGraph(data, 'lineChart');
+    drawBarGraph(data, 'barChart');
+    drawWidget(data);
+    console.log("drawing");
+  },
+  error: function (error_data) {
+    console.log(error_data);
+  }
+})
+var now = new Date();
+function drawLineGraph(data, id) {
+  var planDate = data.labels.plan;
+  var planCount = data.labels.planCount;
+  var actualCount = data.labels.actualCount;
+  var chartLabel = "予定";
+
+
+  var Year = now.getFullYear();
+  var Month = ('00' + (now.getMonth()+1)).slice(-2);
+  var Day = ('00' + now.getDate()).slice(-2);
+  date = Year + "-" + Month + "-" + Day
+
+  //  var count_plan = data.sumplan;
+  //  var count_actual = data.sumactual;
+  var ctx = document.getElementById(id).getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+      labels: planDate,
+      datasets: [{
+        label: chartLabel,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgb(55, 99, 132)',
+        data: planCount,
+      }, {
+        label: "実績",
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 206, 86, 0.2)',
+        data: actualCount,
+      }]
+    },
+
+    // Configuration options go here
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+       scales: {
+        y: {
+          beginAtZero: true
+        },
+         xAxes: [{
+           display: true
+         }],
+         yAxes: [{
+           ticks: {
+             beginAtZero: true
+           }
+         }]
        },
-       {
-         label: chartLabel,
-         backgroundColor: 'rgb(255, 100, 200)',
-         borderColor: 'rgb(55, 99, 132)',
-         data: chartdata,
-       }]
-     },
- 
-     // Configuration options go here
-     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-       scales: {
-        y: {
-          beginAtZero: true
-        },
-         xAxes: [{
-           display: true
-         }],
-         yAxes: [{
-           ticks: {
-             beginAtZero: true
-           }
-         }]
-       }
-     }
- 
-   });
- }
- 
- function drawBarGraph(data, id) {
-   var labels = data.labels;
-   var chartLabel = data.chartLabel;
-   var chartdata = data.chartdata;
-   var ctx = document.getElementById(id).getContext('2d');
-   var myChart = new Chart(ctx, {
-     type: 'pie',
-     data: {
-       labels: labels,
-       datasets: [{
-         label: chartLabel,
-         data: chartdata,
-         backgroundColor: [
-           'rgba(255, 99, 132, 0.2)',
-           'rgba(54, 162, 235, 0.2)',
-           'rgba(255, 206, 86, 0.2)',
-           'rgba(75, 192, 192, 0.2)',
-           'rgba(153, 102, 255, 0.2)',
-           'rgba(255, 159, 64, 0.2)'
-         ],
-         borderColor: [
-           'rgba(255, 99, 132, 1)',
-           'rgba(54, 162, 235, 1)',
-           'rgba(255, 206, 86, 1)',
-           'rgba(75, 192, 192, 1)',
-           'rgba(153, 102, 255, 1)',
-           'rgba(255, 159, 64, 1)'
-         ],
-         borderWidth: 1
-       }]
-     },
-     // Configuration options go here
-     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-       scales: {
-        y: {
-          beginAtZero: true
-        },
-         xAxes: [{
-           display: true
-         }],
-         yAxes: [{
-           ticks: {
-             beginAtZero: true
-           }
-         }]
-       }
-     }
-   });
- }
 
- function drawWidget(data) {
+      annotation: {
+        annotations: [
+          {
+            type: "line",
+            mode: "vertical",
+            // scaleID: "x-axis-0",
+            scaleID: "x-axis-0",
+            value: date,
+            borderColor: "red",
+            borderWidth: 2,
+
+            label: {
+              content: "本日" +  "(" + date+  ")",
+              enabled: true,
+              position: "top"
+            }
+          }
+        ]
+      }
+    }
+
+  });
+}
+
+function drawBarGraph(data, id) {
+  var labels = data.labels;
+  var chartLabel = data.chartLabel;
+  var chartdata = data.chartdata;
+  var ctx = document.getElementById(id).getContext('2d');
+
+
+
+
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: chartLabel,
+        data: chartdata,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    // Configuration options go here
+    options: {
+      // responsive: true,
+      // maintainAspectRatio: false,
+      //  scales: {
+      //   y: {
+      //     beginAtZero: true
+      //   },
+      //    xAxes: [{
+      //      display: true
+      //    }],
+      //    yAxes: [{
+      //      ticks: {
+      //        beginAtZero: true
+      //      }
+      //    }]
+      //  }
+      annotation: {
+        annotations: [
+          {
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "2022-07-18",
+            borderColor: "blue",
+            borderWidth: 5,
+            label: {
+              content: "Today",
+              enabled: true,
+              position: "top"
+            }
+          }
+        ]
+      }
+    }
+  });
+}
+
+function drawWidget(data) {
   var total_work = document.getElementById('total_work');
   total_work.innerText = data.total_work
 
